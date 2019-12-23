@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>手机解锁效果</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#app{
+			width: 426px;
+			height: 640px;
+			margin: auto;
+			position: relative;
+		}
+		.div1{
+			width: 100%;
+			height: 100%;
+			background:url(imgs/eightbg1.png) no-repeat;
+		}
+		.div2{
+			width:376px;
+			height: 72px;
+			border-radius: 10px;
+			background-color: black;
+			float: left;
+			position: absolute;
+			top: 540px;
+			left: 25px;
+		}
+		a{
+			display: block;
+			position:absolute;
+			top: 0;
+			left: 0;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div class="div1"></div>
+		<div class="div2">
+			<a href="#"><img src="imgs/eightbg2.png"></a>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	window.onload=function(){
+		var div1=document.getElementsByClassName("div1")[0];
+		var div2=document.getElementsByClassName("div2")[0];
+		var a=document.getElementsByTagName("a")[0];
+		var down=false;
+		var ax;
+		var left;
+		//鼠标在a上按下时
+		a.onmousedown=function(e){
+			a.style.transition="none";
+			e=(e||window.e)
+			e.cancelBubble=true;
+			down=true;
+			ax=e.clientX;
+		}
+		//鼠标松开时
+		a.onmouseup=function(e){
+			e=(e||window.e)
+			e.cancelBubble=true;
+			down=false;
+			if (left<=140) {
+				left=0;
+
+			}else{
+				left=285;
+				setTimeout(function(){
+					div1.style.background="url(imgs/eightbg3.png) no-repeat";
+					div2.style.display="none"
+				},800)
+			}
+
+			a.style.left=left+"px";
+			a.style.transition="0.8s"
+		}
+		
+		//a滑动
+		div2.onmousemove=function(e){
+			e=(e||window.e)
+			e.preventDefault();
+			e.cancelBubble=true;
+			if(down==true){
+				 left=e.clientX-ax;
+			if (left<=0) {
+				left=0;
+			}if (left>=285) {
+				left=285;
+			}
+			a.style.left=left+"px";
+			}
+			
+			
+		}
+
+		
+		
+	}
+</script>
+</html>

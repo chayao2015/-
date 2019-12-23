@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>拼图游戏</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul{list-style: none;}
+		#app{
+			width:1020px;
+			height: 600px;
+			margin: auto;
+			position: relative;
+			top: 50px;
+
+		}
+		.nav{
+			width: 200px;
+			height: 416px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			
+			
+		}
+
+		.nav li{
+			width:200px;
+			height: 132px;
+			border-radius: 10px;
+			overflow: hidden;
+			opacity: 0.7;
+			cursor: pointer;
+		}
+		.opa{
+			opacity: 1 !important;
+		}
+		.nav li img{
+			width:100%;
+			height: 100%;
+		}
+		
+		button{
+			width:100px;
+			height: 35px;
+			border: none;
+			cursor: pointer;
+			font-size: 16px;
+			color: white;
+			background-color: orange;
+			border: 2px solid red;
+			border-radius: 5px;
+			position: relative;
+			left:50px;
+			top: 50px;
+			opacity: 0.7;
+		}
+		button:hover{
+			opacity: 1;
+
+		}
+		.content{
+			width:800px;
+			height: 529px;
+			border: 5px solid lightgray;
+			border-radius: 15px;
+			margin: auto;
+			float: right;
+			position: absolute;
+			top: 0;
+			right: 0;
+			overflow: hidden;
+		}
+		.content li{
+			width:200px;
+			height: 133px;
+			float: left;
+			position: relative;
+			
+		}
+		.content li img{
+			width:100%;
+			height: 100%;
+
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ul class="nav">
+			<li v-for="li in li" @click="fn(li.index)" :class="{opa:li.opa}"><img :src="li.img"></li>
+		</ul>
+		<button @click="fn2">{{message}}</button>
+		<ul class="content">
+			<li v-for="li in ul" @mousedown="dow(li.index)" ><img :src="li.img"></li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				message:'开始游戏',
+				start:false,
+				index:0,
+				down:false,
+				listartx:0,
+				listarty:0,
+				liindex:0,
+				li:[
+					{index:0,img:"imgs/puzzle/puz_one.jpg",opa:true},
+					{index:1,img:"imgs/puzzle/puz_two.jpg",opa:false},
+					{index:2,img:"imgs/puzzle/puz_three.jpg",opa:false}
+				],
+				ul:[
+					{index:0,img:"imgs/puzzle/puz1_01.jpg"},
+					{index:1,img:"imgs/puzzle/puz1_02.jpg"},
+					{index:2,img:"imgs/puzzle/puz1_03.jpg"},
+					{index:3,img:"imgs/puzzle/puz1_04.jpg"},
+					{index:4,img:"imgs/puzzle/puz1_05.jpg"},
+					{index:5,img:"imgs/puzzle/puz1_06.jpg"},
+					{index:6,img:"imgs/puzzle/puz1_07.jpg"},
+					{index:7,img:"imgs/puzzle/puz1_08.jpg"},
+					{index:8,img:"imgs/puzzle/puz1_09.jpg"},
+					{index:9,img:"imgs/puzzle/puz1_10.jpg"},
+					{index:10,img:"imgs/puzzle/puz1_11.jpg"},
+					{index:11,img:"imgs/puzzle/puz1_12.jpg"},
+					{index:12,img:"imgs/puzzle/puz1_13.jpg"},
+					{index:13,img:"imgs/puzzle/puz1_14.jpg"},
+					{index:14,img:"imgs/puzzle/puz1_15.jpg"},
+					{index:15,img:"imgs/puzzle/puz1_16.jpg"}
+				],
+				uu:[
+					{ul1:[
+					{index:0,img:"imgs/puzzle/puz1_01.jpg"},
+					{index:1,img:"imgs/puzzle/puz1_02.jpg"},
+					{index:2,img:"imgs/puzzle/puz1_03.jpg"},
+					{index:3,img:"imgs/puzzle/puz1_04.jpg"},
+					{index:4,img:"imgs/puzzle/puz1_05.jpg"},
+					{index:5,img:"imgs/puzzle/puz1_06.jpg"},
+					{index:6,img:"imgs/puzzle/puz1_07.jpg"},
+					{index:7,img:"imgs/puzzle/puz1_08.jpg"},
+					{index:8,img:"imgs/puzzle/puz1_09.jpg"},
+					{index:9,img:"imgs/puzzle/puz1_10.jpg"},
+					{index:10,img:"imgs/puzzle/puz1_11.jpg"},
+					{index:11,img:"imgs/puzzle/puz1_12.jpg"},
+					{index:12,img:"imgs/puzzle/puz1_13.jpg"},
+					{index:13,img:"imgs/puzzle/puz1_14.jpg"},
+					{index:14,img:"imgs/puzzle/puz1_15.jpg"},
+					{index:15,img:"imgs/puzzle/puz1_16.jpg"}
+			    ]},
+			    {ul1:[
+			    	{index:0,img:"imgs/puzzle/puz2_01.jpg"},
+					{index:1,img:"imgs/puzzle/puz2_02.jpg"},
+					{index:2,img:"imgs/puzzle/puz2_03.jpg"},
+					{index:3,img:"imgs/puzzle/puz2_04.jpg"},
+					{index:4,img:"imgs/puzzle/puz2_05.jpg"},
+					{index:5,img:"imgs/puzzle/puz2_06.jpg"},
+					{index:6,img:"imgs/puzzle/puz2_07.jpg"},
+					{index:7,img:"imgs/puzzle/puz2_08.jpg"},
+					{index:8,img:"imgs/puzzle/puz2_09.jpg"},
+					{index:9,img:"imgs/puzzle/puz2_10.jpg"},
+					{index:10,img:"imgs/puzzle/puz2_11.jpg"},
+					{index:11,img:"imgs/puzzle/puz2_12.jpg"},
+					{index:12,img:"imgs/puzzle/puz2_13.jpg"},
+					{index:13,img:"imgs/puzzle/puz2_14.jpg"},
+					{index:14,img:"imgs/puzzle/puz2_15.jpg"},
+					{index:15,img:"imgs/puzzle/puz2_16.jpg"}
+			    ]},
+			    {ul1:[
+			    	{index:0,img:"imgs/puzzle/puz3_01.jpg"},
+					{index:1,img:"imgs/puzzle/puz3_02.jpg"},
+					{index:2,img:"imgs/puzzle/puz3_03.jpg"},
+					{index:3,img:"imgs/puzzle/puz3_04.jpg"},
+					{index:4,img:"imgs/puzzle/puz3_05.jpg"},
+					{index:5,img:"imgs/puzzle/puz3_06.jpg"},
+					{index:6,img:"imgs/puzzle/puz3_07.jpg"},
+					{index:7,img:"imgs/puzzle/puz3_08.jpg"},
+					{index:8,img:"imgs/puzzle/puz3_09.jpg"},
+					{index:9,img:"imgs/puzzle/puz3_10.jpg"},
+					{index:10,img:"imgs/puzzle/puz3_11.jpg"},
+					{index:11,img:"imgs/puzzle/puz3_12.jpg"},
+					{index:12,img:"imgs/puzzle/puz3_13.jpg"},
+					{index:13,img:"imgs/puzzle/puz3_14.jpg"},
+					{index:14,img:"imgs/puzzle/puz3_15.jpg"},
+					{index:15,img:"imgs/puzzle/puz3_16.jpg"}
+			    ]}	
+
+
+				]
+				
+				
+			},
+			methods:{
+					//点击左侧边栏小图片的效果
+				fn(index){
+					//当前点击图片透明度为1
+					for(var x=0;x<this.li.length;x++){
+							this.li[x].opa=false;
+						}
+						this.li[index].opa=true;
+					//content图片变为相对应的侧边栏图片
+					for(var i=0;i<this.ul.length;i++){
+						this.ul[i].img=this.uu[index].ul1[i].img;
+						this.ul[i].index=this.uu[index].ul1[i].index;
+					}
+					this.index=index;
+					this.start=false;
+					this.message='开始游戏';
+				},
+					//开始游戏/重新开始
+				fn2(){
+					this.start=!this.start;
+					if(this.start==true){//开始游戏
+						this.message='重新开始';
+						var random=random(16);//调用随机数字函数
+						for(var i=0;i<this.ul.length;i++){
+							this.ul[i].img=this.uu[this.index].ul1[random[i]].img;//根据随机数字打乱顺序
+							this.ul[i].index=this.uu[this.index].ul1[random[i]].index;
+						}
+					}else {//重新开始
+						this.message='开始游戏';
+						for(var i=0;i<this.ul.length;i++){
+							this.ul[i].img=this.uu[this.index].ul1[i] .img;//恢复顺序
+							this.ul[i].index=this.uu[this.index].ul1[i] .index;
+						}
+					}
+
+					
+				//封装函数
+				function random(number){
+ 				//算出16个从0到15的随机数字
+        			var arr1=new Array();
+         			var arr2=new Array();  
+        			 for(var i=0;i<number;i++){
+         				arr1.push(i);//arr1[0,1,2,3.....,15]
+        			 }
+         			for(var k=0;k<number;k++){
+         				var id=Math.floor(Math.random()*number);//0到16的随机数字
+         				//如果arr2中没有将要添加的数字，就将它加到arr1数组中
+         				if(arr2.indexOf(arr1[id])===-1){
+         					arr2.push(arr1[id]);
+         				}else{
+         				//否则这一步从新执行一遍
+         				k=k-1;
+         				continue;
+         				}
+         			}
+         			return arr2//返回随机数字数组
+				}
+				//。。。。。。。
+
+				},
+				dow(event){
+					var e=event||window.event;
+					this.listartx=e.clientX;
+					this.listarty=e.clientY;
+					this.down=true;
+					this.liindex=event;			
+				}
+			},
+			watch:{
+				ul:{
+					handler(n){
+						console.log(n[0].index)
+					},
+					deep:true,
+					immediate:true
+				}
+				
+			}
+		})
+
+		window.onload=function(){
+			var div=document.getElementById("app");
+			var ul=document.getElementsByClassName("content")[0];
+			var li=ul.getElementsByTagName("li");
+			var body=document.documentElement||document.body;
+			body.addEventListener("mouseup",function(){
+				vm.down=false;
+			})
+			body.addEventListener("mousemove",function(e){
+				var e=e||window.event;
+				var li2=li[vm.liindex];
+				if(vm.down==true){
+					li2.style.left=e.clientX-vm.listartx+"px";
+			
+				}
+				
+			})
+			body.addEventListener("mouseup",function(){
+				vm.down=false;
+
+			})
+		}
+	</script>
+	
+</body>
+</html>

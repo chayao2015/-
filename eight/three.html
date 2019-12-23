@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>窗口拖拽（改变大小/最小化)</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding: 0; }
+		body{
+			background: url(imgs/eight3bg.png) no-repeat;
+		}
+		
+		.span{
+			display: block;
+			width:50px;
+			height: 50px;
+			background-color: red;
+			margin: auto;
+			position: relative;
+			top: 100px;
+			cursor: pointer;
+			background: url(imgs/chart3.png) no-repeat;
+			background-size: 50px;
+		}
+		.div2{
+			width: 320px;
+			height: 170px;
+			border: 2px solid gray;
+			border-radius: 5px;
+			background-color: #f6f6f6;
+			position:absolute;
+			top: 100px;
+			left: 300px;
+		}
+		.div3{
+			width:1000px;
+			height: 600px;
+			border: 2px solid gray;
+			border-radius: 5px;
+			background-color: #f6f6f6;
+			position: absolute;
+			top: 0;
+			left: 300px;
+		}
+		
+		.header{
+			width:95%;
+			height: 30px;
+			margin: auto;
+			border-bottom: 1px solid gray;
+			overflow: hidden;
+			line-height: 30px
+		}
+		.header:hover{
+			cursor: move;
+		}
+		h4{
+			float: left;
+		}
+		a{
+			text-decoration: none;
+			width:25px;
+			height:25px;
+			background: url(imgs/chart.png) no-repeat;
+			background-size:75px;
+			border: 1px solid white;
+			border-radius: 5px;
+			float: right;
+			margin:0 4px;
+		}
+		a:active{
+			border: 1px solid lightgreen;
+		}
+		.a1{
+			background-position: -50px 0px;
+		}
+		.a2{
+			background-position: -25px 0px;
+		}
+		.a22{
+			background: url(imgs/chart2.png) no-repeat;
+			background-size:25px;
+		}
+		.a3{
+			background-position:  0px;
+		}
+		.footer{
+			width:95%;
+			margin: auto;
+		}
+		p{
+			font-size: 14px;
+			padding: 5px;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div :class="{div2:div2,div3:div3}" v-show="divshow" id="div">
+			<div class="header" @mousedown.stop.prevent="headerdown">
+				<h4>这是一个可以拖动的窗口</h4>
+				<a href="#" class="a1" @click.stop="close"></a>
+				<a href="#" class="a2" @click.stop="a3" :class="{a22:a22}"></a>
+				<a href="#" class="a3" @click.stop="a1"></a>
+			</div>
+			<div class="footer">
+				<p>①窗口可以拖动；</p>	
+				<p>②窗口可以通过八个方向改变大小；</p>	
+				<p>③窗口可以最小化、最大化、还原、关闭；</p>	
+				<p>④限制窗口最小宽度/高度。</p>
+			</div>	
+		</div>
+		<span @click="a2" v-show="spanshow" class="span"></span>
+	</div>
+		
+	<script type="text/javascript">
+	var vm=	new Vue({
+			el:"#app",
+			data:{
+				distance:{
+					artop:false,
+					starttop:0,
+					startleft:0
+				},
+				spanshow:false,
+				div2:true,
+				div3:false,
+				a22:false,
+				divshow:true
+				
+			},
+			methods:{
+				//最小化
+				a1(){
+					this.spanshow=true;
+					this.divshow=false;
+				},
+				//还原
+				a2(){
+					this.spanshow=false;
+					this.divshow=true;
+				},
+				//放大/还原
+				a3(){
+					this.div3=!this.div3;
+					this.a22=!this.a22
+				},
+				//关闭
+				close(){
+					this.spanshow=true;
+					this.divshow=false;
+				},
+				//点击header激活artop
+				headerdown(e){
+					var e=e||window.event;
+					this.distance.artop=true;
+					var div=document.getElementById("div");
+					this.distance.starttop=e.clientY-div.offsetTop;//鼠标在div中点击的位置
+					this.distance.startleft=e.clientX-div.offsetLeft;
+				}
+				
+			},
+			watch:{
+				distance:{
+					handler(n){
+						var div=document.getElementById("div");
+						var body=document.documentElement||document.body;
+						//拖拽
+						body.onmousemove=function(e){				
+							if(n.artop==true){
+								div.style.top=e.clientY-n.starttop+"px";
+								div.style.left=e.clientX-n.startleft+"px";
+
+							}
+						}						
+						
+					},
+					deep:true
+				}
+			}
+
+		})
+		window.onload=function(){
+			var body=document.documentElement||document.body;
+			//鼠标松开时停止artop
+			body.onmouseup=function(e){
+				vm.distance.artop=false;
+			}
+		}
+	</script>
+</body>
+</html>

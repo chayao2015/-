@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>自定义滚动条</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		body{
+			background-color: #3e3e3e;
+		}
+		#app{
+			width:606px;
+			height: 200px;
+			margin: auto;
+			position: relative;
+			top: 50px;
+			overflow: hidden;
+		}
+		ul{
+			width:1530px;
+			list-style: none;
+			display: flex;
+			justify-content: space-between;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			
+		}
+		li{
+			width:144px;
+			height: 150px;
+			background-color: black;
+			border-radius: 10px;
+			text-align: center;
+		}
+		li img{
+			margin: 10px 0;
+		}
+		p{
+			color: white;
+			font-size: 18px;
+		}
+
+		.scroll{
+			width:100%;
+			height: 20px;
+			background-color: black;
+			position: absolute;
+			bottom: 0px;
+			border-radius: 20px;
+			
+
+		}
+		.scroll div{
+			width:90%;
+			height:20px;
+			background-color: black;
+			margin:  auto;
+			border-radius: 20px;
+			position: relative;
+		}
+		.scroll div span{
+			display:block;
+			width:20%;
+			height:18px;
+			background-color: green;
+			border-radius: 18px;
+			margin: 1px;
+			position: absolute;
+			cursor: pointer;
+		}
+		.arrowleft{
+			display:block;
+			width: 0;
+    		height: 0;
+   			border: 7px solid transparent;
+    		border-top-color: white ;
+    		transform: rotate(90deg);
+    		float: left;
+    		position: relative;
+    		top: 3px;
+
+		}
+		.arrowright{
+			display:block;
+			width: 0;
+    		height: 0;
+   			border: 7px solid transparent;
+    		border-top-color: white ;
+    		transform: rotate(-90deg);
+    		float: right;
+    		position: relative;
+    		top: -16px;
+		}
+		.notes{
+			width:606px;
+			border:1px dashed white;
+			margin: auto;
+			position: relative;
+			top: 80px;
+		}
+		.notes p{
+			margin: 20px;
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<li v-for="li in li">
+				<img v-bind:src="li.img">
+				<p>{{li.text}}</p>
+			</li>
+		</ul>
+		<div class="scroll">
+			<span class="arrowleft" @mousedown.stop.prevent="leftspan"></span>
+			<div  class="scrollrow">
+				<span class="row" @mousedown.stop.prevent="start"></span>
+			</div>
+			<span class="arrowright" @mousedown.stop.prevent="rightspan"></span>
+		</div>
+	</div>
+	<div class="notes">
+		<p>功能说明：</p>
+		<p>1、拖动滚动条，图片列表滑动至目标点；</p>
+		<p>2、滚动条两端鼠标长按自动滑动；</p>
+		<p>3、支持鼠标滚轮。</p>
+	</div>
+	<script type="text/javascript">
+	var vm=new Vue({
+			el:"#app",
+			data:{
+				obj:{
+					artop:false,
+					startleft:0,
+					scrollleft:0,
+					timer:'',
+					mouse:false
+				},	
+				li:[
+					{img:"imgs/1.jpg",text:'iPhone 4'},
+					{img:"imgs/2.jpg",text:'iPad 2'},
+					{img:"imgs/3.jpg",text:'iPod touch'},
+					{img:"imgs/4.jpg",text:'iPod classic'},
+					{img:"imgs/5.jpg",text:'iPod shuffle'},
+					{img:"imgs/6.jpg",text:'iPod nano'},
+					{img:"imgs/7.jpg",text:'MacBook Air'},
+					{img:"imgs/8.jpg",text:'MacBook Pro'},
+					{img:"imgs/9.jpg",text:'Mac mini'},
+					{img:"imgs/10.jpg",text:'Mac Pro'}
+				]
+			},
+			methods:{
+				//点击滚动条
+				start(e){
+					this.obj.artop=true;//激活artop
+					var scroll=document.getElementsByClassName("row")[0];
+					this.obj.startleft=e.clientX-scroll.offsetLeft;
+				},
+				//点击左箭头
+				leftspan(){
+					var _this=this;
+					this.obj.timer=setInterval(function(){
+						_this.obj.scrollleft-=1;
+						if(_this.obj.scrollleft<=0){
+							_this.obj.scrollleft=0;
+						}	
+					},5)
+					
+				},
+				//点击右箭头
+				rightspan(){
+					var _this=this;
+					this.obj.timer=setInterval(function(){
+						_this.obj.scrollleft+=1;
+						if(_this.obj.scrollleft>=435){
+							_this.obj.scrollleft=435;
+						}		
+					},5)
+				}		
+				
+			},
+
+			watch:{
+				obj:{
+					handler(n){
+						var body=document.documentElement||document.body;	
+						//当artop激活后scrollleft的值根据鼠标移动而改变
+						body.onmousemove=function(e){
+							if(n.artop==true){
+								n.scrollleft=e.clientX-n.startleft;
+								if(n.scrollleft<=0){
+									n.scrollleft=0;
+								}else if(n.scrollleft>=435){
+									n.scrollleft=435;
+								}				
+							}
+						}
+						//滚动条根据scollleft的值移动
+						var scroll=document.getElementsByClassName("row")[0];
+						scroll.style.left=n.scrollleft+"px";
+						
+						//图片列表根据scollleft的值移动	
+						var ul=document.getElementsByTagName("ul")[0];
+						ul.style.left=-n.scrollleft*2.12+"px";
+
+					},
+					deep:true,//深度监听
+					immediate:true//实时监听				
+				}
+								
+			}
+		})
+		window.onload=function(){
+			var body=document.documentElement||document.body;
+			//鼠标在页面上松开时停止artop
+			body.onmouseup=function(){
+				vm.obj.artop=false;
+				clearInterval(vm.obj.timer)
+			}
+
+					var x=0;
+					var scroll=document.getElementsByClassName("row")[0];
+					var div=document.getElementsByClassName("scrollrow")[0];
+			//封装函数wheel		
+		var wheel=function (e){
+							var e=e||window.event
+							if(e.wheelDelta>0||e.detail>0){//wheelDelta兼容非FF  detail兼容FF
+								x+=20;
+								if(x>435){
+									x=435;
+								}
+							}else if (e.wheelDelta<0||e.detail<0) {
+								x-=20;
+								if(x<0){
+									x=0;
+								}
+							}
+						vm.obj.scrollleft=x;//scrollleft的值根据x的值改变而改变	
+					}
+
+					div.addEventListener("mousewheel",wheel);//调用函数（鼠标滚动）兼容非FF
+					div.addEventListener("DOMMouseScroll",wheel);//调用函数（鼠标滚动）兼容FF
+		}
+	</script>
+</body>
+</html>
