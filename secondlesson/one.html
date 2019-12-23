@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>百度输入法</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+		#app{
+			width: 100px;
+			height: 200px;
+			margin:auto;
+			position: relative;
+			top: 50px;
+			text-align: center;
+
+		}
+		button{
+			width: 70px;
+		}
+		ul{
+			margin-top: 5px;
+			width: 100%;
+			list-style: none;
+			border: 1px solid black;
+
+		}
+		a{	
+			display: block;
+			text-decoration: none;
+
+		}
+		a:hover{
+			background-color: lightgray;
+		}
+		span{
+			display: block;
+			width: 100%;
+			height: 1px;
+			background-color: black;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<button @click="fn">输入法</button>
+		<ul v-show="vaif">
+			<li><a href="#">手写</a></li>
+			<li><a href="#">拼音</a></li>
+			<span></span>
+			<li @click="colse"><a href="#">关闭</a></li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				vaif:false
+			},
+			methods:{
+				fn(){
+					this.vaif=!this.vaif
+				},
+				colse(){
+					this.vaif=false
+				}
+			}
+		})
+	</script>
+</body>
+</html>

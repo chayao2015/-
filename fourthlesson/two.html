@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>自动播放幻灯片</title>
+        <meta charset="UTF-8">
+        <script src="vue.min.js"></script>
+        <style type="text/css">
+            *{margin: 0;padding:0;}
+            body{background-color:black;}
+            #app{
+                width:500px;
+                height: 200px;
+                border: 1px solid black;
+                margin:auto;
+                background-color: orange;
+                border-radius: 10px;
+                position: relative;
+                top: 50px;
+            }
+            #app div{
+                width: 480px;
+                height: 180px;
+                margin:auto;
+                border:1px solid black;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+                top: 10px;
+            }
+            img{
+                width: 100%;
+                height: 100%;
+                
+            }
+            ul{
+                list-style: none;
+                width: 190px;
+                height: 30px;
+                display:flex;
+                justify-content:space-between;
+                float: right;
+                position:relative;
+                top: -40px;
+                right: 20px;
+            }
+            li{
+                width: 30px;
+                height: 30px;
+                border-radius: 30px;;
+                background-color:lightgreen;
+                text-align: center;
+                line-height: 30px;
+            }
+            li:hover{cursor:pointer;}
+            li:first-child{
+                background-color: orange;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div><img v-bind:src="img"></div>
+            <ul>
+                <li v-for="li in li" @mouseover="fn(li.index)" @mouseleave="likai(li.index)">{{li.name}}</li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            var vm=new Vue({
+                el:"#app",
+                data:{
+                    img:'imgs/two_banner1.jpg',
+                    timer:'',
+                    banner:[
+                        {img:'imgs/two_banner1.jpg'},
+                        {img:'imgs/two_banner2.jpg'},
+                        {img:'imgs/two_banner3.jpg'},
+                        {img:'imgs/two_banner4.jpg'},
+                        {img:'imgs/two_banner5.jpg'}
+                    ],
+                    li:[
+                        {index:0,name:'1'},
+                        {index:1,name:'2'},
+                        {index:2,name:'3'},
+                        {index:3,name:'4'},
+                        {index:4,name:'5'}
+                    ]
+                },
+                methods:{
+                    fn(index){//鼠标停留效果
+                        this.img=this.banner[index].img;//图片
+                        var li=document.getElementsByTagName("li");
+                        for(var x=0;x<this.banner.length;x++){
+                             li[x].style.backgroundColor="lightgreen"
+                         }
+                        li[index].style.backgroundColor="orange";//小标签背景颜色
+                        clearInterval(this.timer);//停止计时器
+                    },
+                    likai(index){//鼠标离开
+                        var _this=this;//缓存this
+                        var i=index;//离开时图片的索引位置
+                        vm.timer=setInterval(function(){
+                                 i++;
+                                 if(i==vm.banner.length){
+                                     i=0;
+                                 }
+                                 _this.img=_this.banner[i].img;
+                                 
+                                 //小标签背景颜色跟着图片索引变化
+                                 var li=document.getElementsByTagName("li");
+                                 for(var x=0;x<_this.banner.length;x++){
+                                    li[x].style.backgroundColor="lightgreen"
+                                 }
+                                 li[i].style.backgroundColor="orange";
+                            },2000)
+                    }
+                }
+            })
+            window.onload=function(){
+                var i=0;
+                vm.timer=setInterval(function(){
+                                 i++;
+                                 if(i==vm.banner.length){
+                                     i=0;
+                                 }  
+                                 vm.img=vm.banner[i].img;
+                                 
+                                 //小标签背景颜色跟着图片索引变化
+                                 var li=document.getElementsByTagName("li");
+                                 for(var x=0;x<vm.banner.length;x++){
+                                    li[x].style.backgroundColor="lightgreen"
+                                 }
+                                 li[i].style.backgroundColor="orange";
+                            },2000)
+            }
+        </script>
+    </body>
+</html>

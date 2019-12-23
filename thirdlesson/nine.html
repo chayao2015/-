@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>倒计时</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#app{
+			width: 300px;
+			height: 170px;
+			margin: auto;
+			background-color: black;
+			position: relative;
+			top: 50px;
+			text-align: center;
+		}
+		p{	
+			width: 300px;
+			height: 100px;
+			margin: auto;
+			font-size: 25px;
+			color: white;
+			line-height: 100px;
+			text-align: center;
+		}
+		span{
+			color: black;
+			padding: 0 15px;
+			margin: 15px;
+			border: 2px solid gray;
+			background-color: white;
+		}
+		button{
+			border: none;
+			outline: none;
+			width: 280px;
+			height: 40px;
+			border: 2px solid gray;
+			border-radius: 10px;
+			color: white;
+			font-size: 20px;
+			font-weight: bold;
+		}
+		.one{
+			background-color: green;
+		}
+		.two{
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p><span>{{minute}}</span>分<span>{{second}}</span>秒</p>
+		<button @click="fn" v-bind:class="buttonstyle">{{message}}</button>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				minute:'01',
+				second:'30',
+				message:'启动',
+				buttonstyle:'one',
+				stop:false
+			},
+			methods:{
+				fn(){
+					this.stop=!this.stop;
+				}
+			},
+			computed:{
+				object(){//创建一个对象包含minute和second，方便同时监听两个参数
+					var{minute,second}=this;
+					return {
+						minute,
+						second
+					}
+
+				}
+			},
+			watch:{
+				stop:function(){
+					var _this=this;//缓存this
+					var x=this.second;
+					if (this.stop==true) {
+					this.timer=setInterval(function(){
+							x=x-1;
+							if (x<0) {
+								x=59;
+							}
+							_this.message='取消';
+							_this.buttonstyle='two';
+							_this.second=x;
+						},1000)
+
+					}else{
+						_this.message='启动';
+						_this.buttonstyle='one';
+						clearInterval(this.timer);
+					}
+				},
+				second:function(){
+					if (this.second==59) {
+						this.minute='00';
+					}
+				},
+				object:{
+					handler:function(n,o){//同时监听两个参数
+						if (n.minute==0&&n.second==0) {
+							clearInterval(this.timer)
+						}
+					},
+					deep:true
+				}
+
+			}
+		})
+	</script>
+</body>
+</html>

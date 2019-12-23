@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>用parseInt解析数字，并求和</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+		#app{
+			width: 700px;
+			margin:auto;
+			position: relative;
+			top: 50px;
+			font-size: 20px;
+		}
+		input{
+			width: 200px;
+			height: 30px;
+			font-size: 20px;
+		}
+		button{
+			width: 50px;
+			height: 30px;
+		}
+		strong{
+			font-size: 20px;
+			margin:15px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<input type="" name="one" v-model="one">+<input type="" name="two" v-model="two">=<strong>{{message}}</strong><button @click="fn">求和</button>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				message:"3",
+				one:"1",
+				two:"2"
+			},
+			methods:{
+				fn(){
+					this.message=parseInt(this.one)+parseInt(this.two);
+				}
+			}
+		})
+	</script>
+	
+</body>
+</html>

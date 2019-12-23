@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>评分系统</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+		#app{
+			width: 900px;
+			height: 200px;
+			margin:auto;
+			position: relative;
+			top: 50px;
+		}
+		span{
+			display: block;
+			width: 150px;
+			height: 50px;
+			text-align: center;
+			line-height: 50px;
+			float: left;
+			font-weight: bold;
+		}
+		ul{
+			width: 300px;
+			height: 50px;
+			float: left;
+			list-style: none;
+			display: flex;
+			justify-content: space-between;
+		}
+		aside{
+			font-size: 14px;
+			width: 190px;
+			height: 70px;
+			padding: 5px;
+			border: 1px solid gray;
+			float: left;
+			position: absolute;
+			top: 55px;
+			left: 80px;
+			
+		}
+		h4{
+			color: red;
+		}
+		content{
+			color: red;
+		}
+		strong{
+			width: 450px;
+			height: 50px;
+			float: left;
+			line-height: 50px;
+			font-size: 16px;
+			display: flex;
+			flex-direction: nowrap;
+		}
+		li{
+			width: 60px;
+			height: 50px;
+			background: url(imgs/nine_pentagram.png) no-repeat;
+			background-size: 60px;
+			margin-top: 3px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<span>点击星星就能打分</span>
+		<ul>
+			<li v-for="li in li" :class="{listyle:li.listyle}" @mouseover="mouseover(li.id)" @mouseleave="mouseleave" @click="fn(li.id)"></li>
+		</ul>
+		<strong>&nbsp;&nbsp;<content>{{number}} 分</content>（{{message}})</strong>
+		<aside v-for="li in li" v-show="li.asideif">
+			<h4>{{li.id}} 分 {{li.h4}}</h4>
+			<p>{{li.p}}</p>
+		</aside>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				message:'',
+				number:0,
+				li:[
+					{id:1,listyle:true,h4:'很不满意',p:'差得太离谱，与卖家描述的严重不符，非常不满',asideif:false},
+					{id:2,listyle:true,h4:'不满意',p:'部分有破损，与卖家描述的不符，不满意',asideif:false},
+					{id:3,listyle:true,h4:'一般',p:'质量一般，没有卖家描述的那么好',asideif:false},
+					{id:4,listyle:true,h4:'满意',p:'质量不错，与卖家描述的基本一致，还是挺满意的',asideif:false},
+					{id:5,listyle:true,h4:'非常满意',p:'质量非常好，与卖家描述的完全一致，非常满意',asideif:false}
+					
+				]
+			},
+			methods:{
+				mouseover(n){//鼠标经过事件
+					var li=document.getElementsByTagName('li');
+					for(var i=0;i<5;i++){
+						li[i].style.backgroundPosition="0 0";//所有五星黄色图案变五星空白图案
+					}
+					for(var i=0;i<n;i++){
+						li[i].style.backgroundPosition="0 -50px";//五星空白图案变五星黄色图案
+					}
+					this.li[n-1].asideif=true;//对应五星的下拉框显示
+					var aside=document.getElementsByTagName("aside");
+					aside[n-1].style.left=80+(n-1)*60+"px";//对应五星的下拉框位置
+		
+				},
+				mouseleave(){//鼠标离开效果
+	var li=document.getElementsByTagName('li');
+					for(var i=0;i<5;i++){
+						li[i].style.backgroundPosition="0 0"//所有五星还原
+						this.li[i].asideif=false;//所有下拉框隐藏
+					}
+					for(var i=0;i<this.number;i++){
+						li[i].style.backgroundPosition="0 -50px"//选择后的五星保持黄色
+					}
+				},
+				fn(n){//鼠标点击事件
+					this.number=n;//把number的值改为当前鼠标所在五星位置的值，并保存
+					this.message=this.li[n-1].p;//storng的值
+				}
+			}
+		})
+	</script>
+</body>
+</html>

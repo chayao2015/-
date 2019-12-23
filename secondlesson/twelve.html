@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>全选/全不选/反选</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+		#app{
+			width: 200px;
+			margin:auto;
+			position: relative;
+			top: 50px;
+		}
+		dl{
+			width: 100%;
+			border: 1px solid black;
+			border-radius: 5px;
+			font-size: 20px;
+		}
+		input{
+			width: 20px;
+			height: 20px;
+		}
+	   label{
+	   	   display: block;
+	   	   width:51%;
+			margin:10px;
+		}
+		a{
+			text-decoration: none;
+			float: right;
+			position: relative;
+			top: -38px;
+			right: 40px;
+			color: blue;
+		}
+		dt{
+			border-bottom: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<dl>
+			<dt>
+				<label><input type="checkbox" v-model="quanxuan" @click="quanxuan1">{{message}}</label>
+				<a href="#" @click="fn">反选</a>
+			</dt>
+			<dd v-for="dd in dd">
+				<label><input type="checkbox" v-model="dd.xuanzhe" >{{dd.name}}</label>
+			</dd>
+		</dl>
+	</div>
+	<script type="text/javascript">
+	 var vm=new Vue({
+			el:"#app",
+			data:{
+				message:'全选',
+				quanxuan:false,
+				dd:[
+					{index:1,name:'选项一',xuanzhe:false},
+					{index:1,name:'选项二',xuanzhe:false},
+					{index:1,name:'选项三',xuanzhe:false},
+					{index:1,name:'选项四',xuanzhe:false},
+					{index:1,name:'选项五',xuanzhe:false},
+					{index:1,name:'选项六',xuanzhe:false},
+					{index:1,name:'选项七',xuanzhe:false},
+					{index:1,name:'选项八',xuanzhe:false},
+					{index:1,name:'选项九',xuanzhe:false},
+					{index:1,name:'选项十',xuanzhe:false}
+				]
+			},
+			methods:{
+				//反选
+				fn(){
+					var dd=this.dd;
+					for(var i=0;i<dd.length;i++){
+						dd[i].xuanzhe=!dd[i].xuanzhe;
+					}
+				},
+				//为了不和监听中的dd发生冲突，所以单独为全选按钮加一个全不选功能
+				quanxuan1(){
+					if (this.quanxuan==false) {
+						var dd=this.dd;
+						for(var i=0;i<dd.length;i++){
+							this.dd[i].xuanzhe=false;
+						}
+					}
+				}
+			},
+			watch:{
+				//全选
+				quanxuan:function(){
+					var dd=vm.dd;
+					for(var i=0;i<dd.length;i++){
+						if(vm.quanxuan==true){
+							vm.dd[i].xuanzhe=true;
+						}
+					}
+				},
+				// 当选项都选择时，全选按钮状态
+				dd:{
+					handler(n,o){
+						var a=0;
+						for(var i=0;i<n.length;i++){
+								a+=Number(n[i].xuanzhe);//将布尔值转换为数值，当数值=选项的个数时。。。
+								 if(a==n.length){
+									this.quanxuan=true;
+								}else{
+									this.quanxuan=false;
+								}
+							
+						}
+					},
+					immediate:true,//即使监听开关
+					deep:true//深度监听开关
+				}
+				
+			}
+			
+		})
+		
+	</script>
+</body>
+</html>

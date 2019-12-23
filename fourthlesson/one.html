@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>settimeout应用</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{	margin: 0;padding: 0;}
+		body{
+			background-color: #f6f6f6;
+		}
+		nav{
+			width: 856px;
+			height: 100px;
+			margin: auto;
+			position: relative;
+			top: 20px;
+		}
+		/*主标签样式*/
+		ul{
+			list-style: none;
+			width: 100%;
+			height: 35px;
+			border-radius: 10px;
+			overflow:hidden;
+		}
+		ul li{
+			width: 107px;
+			height: 35px;
+			float: left;
+		}
+		ul li a{
+			display: block;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			line-height: 35px;
+			text-decoration: none;
+			color: white;
+			background:url(imgs/one_nav.png) no-repeat 0 -1px;
+
+		}
+		ul li a:hover{
+			background:url(imgs/one_nav.png) no-repeat 0 -145px;
+		}
+		/*附标签样式*/
+		p{
+			display: block;
+			
+			height: 25px;
+			border-radius: 5px;
+			margin-top: 5px;
+			border: 1px solid lightgray;
+			position: absolute;
+		}
+		p span{
+			display: block;
+			width: 80px;
+			height: 25px;
+			float: left;
+			
+		}
+		p span a{
+			display: block;
+			width: 78px;
+			height: 100%;
+			font-size: 14px;
+			color: black;
+			text-align: center;
+			line-height: 25px;
+			text-decoration: none;
+			background:url(imgs/one_nav.png) no-repeat 0 -208px;
+			
+		}
+		p span a:hover{text-decoration:underline;color: blue;}
+		.subnay1{
+			width: 640px;
+			border: none;
+			
+		}
+		.subnay2{
+			width: 640px;
+			left: 120px;
+			
+		}
+		.subnay3{
+			width: 480px;
+			left: 220px;
+			
+		}
+		.subnay4{
+			width: 400px;
+			left: 340px;
+			
+		}
+		.subnay5{
+			width: 400px;
+			left: 440px;
+		}
+		.subnay6{
+			width: 560px;
+			float: right;
+			right:0px;
+			
+		}
+		.subnay7{
+			width: 320px;
+			float: right;
+			right:0px;
+			
+		}
+		.subnay8{
+			width: 640px;
+			float: right;
+			right:0px;
+		}
+		em{
+		width:0;
+        height:0;
+		border-right:5px solid transparent;
+		border-left:5px solid transparent;
+		border-bottom:5px solid black;
+		float: left;
+		position: absolute;
+		top: -5px;
+		}
+		.emleft{left: 35px;}
+		.emright1{float: right;right:255px; }
+		.emright2{float: right;right:155px;}
+		.emright3{float: right;right:45px;}
+	</style>
+</head>
+<body>
+	<nav id="app" @mouseleave="likai">
+		<ul>
+			<li v-for="li in li"><a href="#"@mouseover="fn(li.index)">{{li.name}}</a></li>
+		</ul>
+		<p class="subnay1"  v-if="p[0].if">
+			<span v-for="p in p1"><a href="#">{{p.name}}</a></span>
+		</p>
+		<p class="subnay2"  v-if="p[1].if">
+			<em class="emleft"></em>
+			<span v-for="p in p2"><a href="#">{{p.name}}</a></span>
+		</p>
+		<p class="subnay3"  v-if="p[2].if">
+			<em class="emleft"></em>
+			<span v-for="p in p3"><a href="#">{{p.name}}</a></span>
+		</p>
+		<p class="subnay4"  v-if="p[3].if">
+			<em class="emleft"></em>
+			<span v-for="p in p4"><a href="#">{{p.name}}</a></span>
+		</p>
+		<p class="subnay5"  v-if="p[4].if">
+			<em class="emleft"></em>
+			<span v-for="p in p5"><a href="#">{{p.name}}</a></span>
+		</p>
+		<p class="subnay6"  v-if="p[5].if">
+			<em class="emright1"></em>
+			<span v-for="p in p6"><a href="#">{{p.name}}</a></span>
+		</p>
+		<p class="subnay7"  v-if="p[6].if">
+			<em class="emright2"></em>
+			<span v-for="p in p7"><a href="#">{{p.name}}</a></span>
+		</p>
+		<p class="subnay8"  v-if="p[7].if">
+			<em class="emright3"></em>
+			<span v-for="p in p8"><a href="#">{{p.name}}</a></span>
+		</p>
+		
+	</nav>
+	<script type="text/javascript">
+	var vm=new Vue({
+			el:"#app",
+			data:{
+				li:[
+					{index:0,name:'站长之家'},
+					{index:1,name:'行业咨询'},
+					{index:2,name:'站长在线'},
+					{index:3,name:'网站运营'},
+					{index:4,name:'设计在线'},
+					{index:5,name:'网络编程'},
+					{index:6,name:'联盟咨询'},
+					{index:7,name:'服务器'}
+				],
+				p:[
+					{if:false},
+					{if:false},
+					{if:false},
+					{if:false},
+					{if:false},
+					{if:false},
+					{if:false},
+					{if:false}
+				],
+				
+				p1:[
+
+				],
+				p2:[
+					{name:'业界动态'},
+					{name:'收购融资'},
+					{name:'门户动态'},
+					{name:'搜索引擎'},
+					{name:'网络游戏'},
+					{name:'电子商务'},
+					{name:'广告传媒'},
+					{name:'厂商开发'}
+				],
+				p3:[
+					{name:'站长报道'},
+					{name:'好站推荐'},
+					{name:'站长聚会'},
+					{name:'站长访谈'},
+					{name:'站长茶馆'},
+					{name:'网站排行'}
+				],
+				p4:[
+					{name:'建站经验'},
+					{name:'策划盈利'},
+					{name:'搜索优化'},
+					{name:'网站推广'},
+					{name:'免费资源'}
+				],
+				p5:[
+					{name:'酷站推荐'},
+					{name:'网页设计'},
+					{name:'WEB标准'},
+					{name:'视频处理'},
+					{name:'设计活动'}
+				],
+				p6:[
+					{name:'Asp编程'},
+					{name:'Php编程'},
+					{name:'.Net编程'},
+					{name:'Xml编程'},
+					{name:'Access'},
+					{name:'Mssql'},
+					{name:'Mysql'}
+				],
+				p7:[
+					{name:'联盟动态'},
+					{name:'联盟介绍'},
+					{name:'联盟点评'},
+					{name:'网赚技巧'}
+				],
+				p8:[
+					{name:'Web服务器'},
+					{name:'Ftp服务器'},
+					{name:'Mail服务器'},
+					{name:'Dns服务器'},
+					{name:'Win服务器'},
+					{name:'Linux服务器'},
+					{name:'安全防护'},
+					{name:'虚拟主机'}
+				]
+			},
+			methods:{
+				fn(index){//鼠标悬浮触发事件
+					var _this=this;
+					setTimeout(function(){
+						for(var i=0;i<_this.p.length;i++){
+						_this.p[i].if=false;
+					}
+						_this.p[index].if=true;
+						
+					},200)				
+				},
+				
+				likai(){//鼠标离开nav时触发事件
+					var _this=this;
+					setTimeout(function(){
+						for(var i=0;i<_this.p.length;i++){
+						_this.p[i].if=false;
+						}
+					},500)
+				}
+			}
+		})
+		
+	</script>
+</body>
+</html>

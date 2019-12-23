@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>网页换肤</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+	#app{
+			width: 100%;
+			background-color: gray;
+	}
+	#app li{
+		width: 20px;
+		height: 20px;
+		border: 2px solid black;
+		list-style: none;
+	}
+	#app ul{
+		width: 100px;
+		height: 38px;
+		margin: auto;
+		position: relative;
+		top: 20px;
+		display:flex;
+		justify-content:space-between;
+	}
+	#app div{
+		margin:auto;
+		position: relative;
+		top: 50px;
+		width: 310px;
+		height: 25px;
+		display:flex;
+		justify-content:space-between;
+	}
+	#app button{
+			border: none;
+			width: 50px;
+			height: 25px;
+			color: white;
+			background-color: black;
+	}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<li v-for="li in li" @click="fn(li.id)"></li>
+		</ul>
+		<div>
+		<button v-for="button in button">{{button.name}}</button>
+	   </div>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				li:[
+					{id:0,background:'red'},
+					{id:1,background:'green'},
+					{id:2,background:'gray'}
+				],
+				button:[
+					{name:'新闻'},
+					{name:'娱乐'},
+					{name:'体育'},
+					{name:'电影'},
+					{name:'音乐'},
+					{name:'旅游'}
+				]
+			},
+			methods:{
+				fn(n){
+					var div=document.getElementById("app")
+					div.style.backgroundColor=this.li[n].background;
+					console.log(n);
+				}
+				
+			}
+		})
+		window.onload=function() {
+					var div=document.getElementById("app")
+					var li=div.getElementsByTagName("li");
+					div.style.height=document.documentElement.clientHeight+"px";
+					li[0].style.backgroundColor="red";
+					li[1].style.backgroundColor="green";
+					li[2].style.backgroundColor="gray";
+					for(var i=0;i<li.length;i++){
+						li[i].onclick=function(){
+								for(var i=0;i<li.length;i++){
+									li[i].style.border="2px solid black";
+									this.style.border="5px solid black";
+								}
+						}
+					}	
+		}
+	</script>
+</body>
+</html>

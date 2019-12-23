@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>封装兼容性添加、删除事件函数</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<style>
+		pre{
+			color:green;
+			padding:10px 15px;
+			background:#f0f0f0;
+			border:1px dotted #333;
+			font:12px/1.5 Courier New;
+		}
+		span{color:#999;}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var input=document.getElementsByTagName('input');
+			var id=false;
+			input[1].onclick=function() {
+				id=true;input[0].value="点击按钮";
+			}
+			input[2].onclick=function() {
+				id=false;input[0].value="毫无用处的按钮";
+			}
+			input[0].onclick=function() {
+				if (id==true) {
+					alert("事件绑定成功")
+				}
+			}
+		}
+	</script>
+	</head>
+<body>
+<pre>
+&lt;script type="text/javascript"&gt;
+window.onload=function(){
+	var input=document.getElementsByTagName('input');
+	var id=false;
+	input[1].onclick=function() {
+		id=true;input[0].value="点击按钮";
+	}
+	input[2].onclick=function() {
+		id=false;input[0].value="毫无用处的按钮";
+	}
+	input[0].onclick=function() {
+		if (id==true) {
+			alert("事件绑定成功")
+		}
+	}
+}
+&lt;/script&gt;
+</pre>
+<center>
+	<input type="button" value="毫无用处的按钮">
+	 <input type="button" value="绑定click"> 
+	 <input type="button" value="解除绑定">
+</center>
+</body>
+</html>

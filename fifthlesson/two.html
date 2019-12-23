@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>显示单击的坐标</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		pre{
+			border: 1px dotted green;
+			background-color: #f6f6f6;
+			color: green;
+			padding: 20px;
+		}
+	</style>
+</head>
+<body>
+	<pre>
+&ltscript type="text/javascript"&gt
+		window.onload=function(){
+			document.documentElement.onclick=function(event){
+				alert("坐标："+"X"+event.clientX+",Y"+event.clientY);
+			}
+		}
+&lt/script&gt
+	</pre>
+	<script type="text/javascript">
+		window.onload=function(){
+			document.documentElement.onclick=function(event){
+				alert("坐标："+"X"+event.clientX+",Y"+event.clientY);
+			}
+		}
+	</script>
+</body>
+</html>

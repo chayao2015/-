@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>用循环将三个DIV变为红色</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#app{
+			width: 500px;
+			height: 500px;
+			margin:auto;
+			position: relative;
+			top: 100px;
+		}
+		#app ul{
+			width: 500px;
+			height: 150px;
+			list-style: none;
+		}
+		 li{
+			width: 150px;
+			height: 150px;
+			border: 1px solid black;
+			float: left;
+			margin:5px;
+			background-color:black;
+		}
+		button{
+			display: block;
+			width: 200px;
+			height: 40px;
+			position: relative;
+			top: 50px;
+			margin:auto;
+		}
+		.style{
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<li v-for="li in li" :class="{style:li.style}"></li>
+		</ul>
+		<button @click="fn">点击按钮将DIV变为红色</button>
+	</div>
+
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				li:[
+					{style:false},
+					{style:false},
+					{style:false}
+				]
+			},
+			methods:{
+				fn(){
+					for(var i=0;i<3;i++){
+						var li=this.li;
+						li[i].style=!li[i].style;
+					}
+				}
+			}
+		})
+	</script>
+</body>
+</html>

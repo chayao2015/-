@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>页面加载后累加</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		#app{
+			width: 100px;
+			height: 100px;
+			margin:0 auto;
+			border: 1px solid black;
+			position: relative;
+			top: 50px;
+			font-size: 40px;
+			line-height: 100px;
+			text-align: center;
+			color: green;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">{{message}}</div>
+	<script type="text/javascript">
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				message:1
+			}	
+		})
+		window.onload=function(){
+					setInterval(function(){
+						vm.message+=1;
+					},1000)
+				}
+	</script>
+</body>
+</html>

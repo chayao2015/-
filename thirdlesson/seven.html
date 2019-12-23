@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>网页计算器</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+		#app{
+			width: 450px;
+			margin: auto;
+			position: relative;
+			top: 50PX;
+		}
+		content{
+			display: block;
+			width: 450px;
+			height: 310px;
+			background-color: black;
+			}
+		button{
+			font-size: 30px;
+			color: white;
+			width: 100px;
+			height: 50px;
+			float: left;
+			margin-top:10px;
+			margin-left: 10px;
+			border: none;
+			border-radius: 5px;
+			line-height: 50px;
+			text-align: center;
+			outline: none;
+			background-image:linear-gradient(gray,lightgray,gray);
+		}
+		button:hover{
+			background-image:linear-gradient(lightgray,gray,lightgray);
+		}
+		.sum{
+			height: 110px;
+		}
+		.sum:hover{
+			background-image:none;
+			background-color: orange;
+		}
+		.dian{
+			width: 210px;
+			position: relative;
+			bottom: 60px;
+		}
+		.ning{
+			position: relative;
+			bottom: 60px;
+		}
+		.gongshi:hover{
+			background-image:none;
+			background-color: orange;
+		}
+
+		header{
+			width: 450px;
+			height: 130px;
+			background-color: black;
+		}
+		.p1{
+			height: 25px;
+			line-height: 25px;
+			margin-right: 10px;
+			color: white;
+			float: right;
+		}
+		.p2,h3{
+			width: 430px;
+			height: 50px;
+			line-height: 50px;
+			float: right;
+			margin:0 10px;
+			position: relative;
+			background-color: lightgray;
+		}
+		.p2{
+			font-size: 20px;
+		}
+		h3{
+			font-size: 40px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<header>
+			<p class="p1">{{p1}}</p>
+			<p class="p2">{{p2}}</p>
+			<h3>{{h}}</h3>
+		</header>
+		<content>
+			<button v-for="button in button" v-bind:class="button.style" @click="fn(button.index)">{{button.text}}</button>
+		</content>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				p1:'QQ1781356306',
+				p2:'',
+				h:'',
+				button:[
+					{index:0,text:'C',name:'',style:'gongshi'},
+					{index:1,text:'%',name:'%',style:'gongshi'},
+					{index:2,text:'÷',name:'/',style:'gongshi'},
+					{index:3,text:'×',name:'*',style:'gongshi'},
+					{index:4,text:'7',name:'7',style:'shuzi'},
+					{index:5,text:'8',name:'8',style:'shuzi'},
+					{index:6,text:'9',name:'9',style:'shuzi'},
+					{index:7,text:'-',name:'-',style:'gongshi'},
+					{index:8,text:'4',name:'4',style:'shuzi'},
+					{index:9,text:'5',name:'5',style:'shuzi'},
+					{index:10,text:'6',name:'6',style:'shuzi'},
+					{index:11,text:'+',name:'+',style:'gongshi'},
+					{index:12,text:'1',name:'1',style:'shuzi'},
+					{index:13,text:'2',name:'2',style:'shuzi'},
+					{index:14,text:'3',name:'3',style:'shuzi'},
+					{index:15,text:'=',name:'',style:'sum'},
+					{index:16,text:'0',name:'0',style:'ning'},
+					{index:17,text:'.',name:'.',style:'dian'}
+
+				]
+			},
+				methods:{
+					fn(index){
+						if (index==0) {
+							this.p2='';
+							this.h='';
+						}else if(index==15){
+							this.h=eval(this.p2);
+						}else{
+							this.p2+=this.button[index].name;
+						}
+					}
+				}
+				
+		})
+	</script>
+</body>
+</html>

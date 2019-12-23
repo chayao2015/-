@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DIV闪烁</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		div{
+			width: 200px;
+			height: 200px;
+			background-color: red;
+			margin: 0 auto;
+			line-height: 200px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<p>点我就闪烁</p>
+	</div>
+	<script type="text/javascript">
+		window.onload=function(){
+			var div=document.getElementsByTagName('div')[0];
+			div.onclick=function(){
+				var i=0;
+				var timer=setInterval(function(){
+					i++;
+					if(i>=8){
+						i=0;
+						clearInterval(timer);
+					}
+					if (i%2==1) {
+						div.style.backgroundColor="yellow";
+					}else{
+						div.style.backgroundColor="red";
+					}
+				},200)
+			}
+		}
+	</script>
+</body>
+</html>

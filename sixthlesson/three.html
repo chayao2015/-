@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>自定义多级右键菜单</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		body{
+			background-color: #f6f6f6;
+		}
+		.h3{
+			display: block;
+			width: 300px;
+			height: 100px;
+			line-height: 100px;
+			margin: auto;
+		}
+		#app{
+			display:none;
+		}
+		ul{
+			list-style: none;
+		}
+		li:hover{
+			cursor: pointer;
+		}
+		.ul{
+			list-style: none;
+			width: 200px;
+			height: 160px;
+			background-color: green;
+			position: absolute;                                  
+		}
+		.ul li{
+			float: right;
+		}
+		.ul a{
+			float: right;
+			display: block;
+			width:160px;
+			height: 40px;
+			line-height: 40px;
+			text-decoration: none;
+			color: white;	
+		}
+		.ul span{
+			width: 0;
+   			height: 0;
+    		border: 6px solid;
+    		border-color:black transparent transparent;
+    	 	float: left;
+    	 	position: relative;
+			left: 150px;
+    		top: 18px;
+		}
+	
+		.ul1{
+			width: 200px;
+			background-color: #f6f6f6;
+			position: absolute;
+		}
+		.ul1 li{
+			width: 100%;
+			height: 30px;
+			margin:1px 0;
+			background-color: green;
+			line-height: 30px;
+			color: white;
+			text-align: center;
+			font-size: 14px;
+		}
+		.ul1 li:hover{
+			background-color: #f6f6f6;
+			color: black;
+		}
+
+		.ul2{
+			width: 200px;
+			background-color: #f6f6f6;
+			position: absolute;
+		}
+		.ul2 li{
+			width: 100%;
+			height: 30px;
+			margin:1px 0;
+			background-color: green;
+			line-height: 30px;
+			color: white;
+			text-align: center;
+			font-size: 14px;
+		}
+		.ul2 li:hover{
+			background-color: #f6f6f6;
+			color: black;
+		}
+		.ul3{
+			width: 200px;
+			background-color: #f6f6f6;
+			position: absolute;
+		}
+		.ul3 li{
+			width: 100%;
+			height: 30px;
+			margin:1px 0;
+			background-color: green;
+			line-height: 30px;
+			color: white;
+			text-align: center;
+			font-size: 14px;
+		}
+		#footer ul{
+			width: 160px;
+			background-color: #f6f6f6;
+			position: absolute;
+			display: none;
+		}
+		#footer ul li{
+			width: 100%;
+			height: 30px;
+			margin:1px 0;
+			background-color: green;
+			line-height: 30px;
+			color: white;
+			text-align: center;
+			font-size: 12px;
+		}
+		#footer ul li:hover{
+			background-color: #f6f6f6;
+			color: black;
+		}
+	</style>
+</head>
+<body>
+	<h3 class="h3             ">点击右键弹出自定义菜单</h3>
+	<div id="app">
+		<ul class="ul">
+			<a href="#">JavaScript学习</a>
+			<li v-for="ul in ul" @mouseenter="fn(ul.index)" @mouseleave="fnleave(ul.index)"><a href="#">{{ul.name}}</a><span></span></li>
+		</ul>
+		<!-- 二级下标 -->
+		<ul class="ul1" v-show="ul[0].vif" >
+			<li v-for="ul1 in ul1">{{ul1.name}}</li>
+		</ul>
+		<ul class="ul2" v-show="ul[1].vif" >
+			<li v-for="ul2 in ul2">{{ul2.name}}</li>
+		</ul>
+		<ul class="ul3" v-show="ul[2].vif" >
+			<li v-for="ul3 in ul3" @mouseenter="fn3(ul3.index)" @mouseleave="fn3leave(ul3.index)">{{ul3.name}}</li>
+		</ul>
+		<!-- 三级下标 -->
+		<div id="footer">
+		<ul>
+			<li>ECMAScript</li>
+			<li>DOM</li>
+			<li>BOM</li>
+			<li>javascript兼容性来源</li>
+		</ul>
+		<ul></ul>
+		<ul></ul>
+		<ul>
+			<li>什么是闭包</li>
+			<li>简单应用</li>
+			<li>闭包缺点</li>
+		</ul>
+		<ul></ul>
+		<ul></ul>
+		<ul>
+			<li>setInterval</li>
+			<li>aeyTimeout</li>
+		</ul>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				ul:[
+					{index:0,name:'第一课',vif:false},
+					{index:1,name:'第二课',vif:false},
+					{index:2,name:'第三课',vif:false}
+				],
+				ul1:[
+					{name:'网页特效原理分析'},
+					{name:'响应用户操作'},
+					{name:'提示框效果'},
+					{name:'事件驱动'},
+					{name:'元素属性操作'}
+				],
+				ul2:[
+					{name:'改变网页背景颜色'},
+					{name:'函数传参'},
+					{name:'高重用性函数的编写'},
+					{name:'126邮箱全选效果'},
+					{name:'循环及遍历操作'}
+				],
+				ul3:[
+					{index:0,name:'javascript组成',vif:true},
+					{index:1,name:'JavaScript出现的位置、优缺点',vif:true},
+					{index:2,name:'变量、类型、typeof',vif:true},
+					{index:3,name:'闭包',vif:true},
+					{index:4,name:'运算符',vif:true},
+					{index:5,name:'程序流程控制',vif:true},
+					{index:6,name:'定时器的使用',vif:true}
+				]
+			},
+			methods:{
+				fn(index){//鼠标悬浮在弹出框的效果
+					var li=document.getElementsByTagName("ul")[0].getElementsByTagName("li")[index];
+					var a=li.getElementsByTagName("a")[0];
+					var _this=this;
+					setTimeout(function(){
+						li.style.backgroundColor="#f6f6f6";
+						a.style.color="black";
+						_this.ul[index].vif=true;
+					},100)
+					var ul=document.getElementsByTagName("ul")[index+1];
+					//鼠标悬浮在当前标签的二级下标的效果
+					ul.onmouseenter=function(){
+						setTimeout(function(){
+							li.style.backgroundColor="#f6f6f6";
+							a.style.color="black";
+							_this.ul[index].vif=true; 	
+						},100)		                               
+					}
+					//鼠标离开在当前标签的二级下标的效果
+					ul.onmouseleave=function(){
+						setTimeout(function(){
+							li.style.backgroundColor="green";
+							a.style.color="white";
+							_this.ul[index].vif=false; 	
+						},100)
+					}
+				},
+				fnleave(index){//鼠标离开在弹出框的效果
+					var li=document.getElementsByTagName("ul")[0].getElementsByTagName("li")[index];
+					var a=li.getElementsByTagName("a")[0];
+					var _this=this;
+					setTimeout(function(){
+						li.style.backgroundColor="green";
+						a.style.color="white";
+						_this.ul[index].vif=false;
+					},100)	
+				},
+
+				fn3(index){//鼠标悬浮在第三个二级标的效果
+					var li=document.getElementsByTagName("ul")[0].getElementsByTagName("li")[2];
+					var a=li.getElementsByTagName("a")[0];
+					var li2=document.getElementsByTagName("ul")[3].getElementsByTagName("li")[index];
+					setTimeout(function(){
+						li2.style.backgroundColor="#f6f6f6";
+						li2.style.color="black";
+					},100)
+					var _this=this;
+					var footer=document.getElementById("footer");
+					var ul=footer.getElementsByTagName("ul");
+					setTimeout(function(){
+						ul[index].style.display="block";
+					},100)
+					//鼠标悬浮在三级标的效果
+					ul[index].onmouseenter=function(){
+						setTimeout(function(){
+							li.style.backgroundColor="#f6f6f6";
+							a.style.color="black";
+							_this.ul[2].vif=true;
+							ul[index].style.display="block";
+							li2.style.backgroundColor="#f6f6f6";
+							li2.style.color="black";	
+						},100)
+					}
+					//鼠标离开三级标的效果
+					ul[index].onmouseleave=function(){
+						setTimeout(function(){
+							li.style.backgroundColor="green";
+							a.style.color="white";
+							ul[index].style.display="none";
+							_this.ul[2].vif=false;
+							li2.style.backgroundColor="green";
+							li2.style.color="white";	
+						},100)
+					}
+				},
+				fn3leave(index){//鼠标离开在第三个二级标的效果
+					var footer=document.getElementById("footer");
+					var ul=footer.getElementsByTagName("ul");
+					var li2=document.getElementsByTagName("ul")[3].getElementsByTagName("li")[index];
+					
+					setTimeout(function(){
+						li2.style.backgroundColor="green";
+						li2.style.color="white";
+						ul[index].style.display="none";
+					},100)
+					
+				}
+			}
+		})
+
+		window.onload=function(){
+			var ul=document.getElementsByTagName("ul")[0];
+			var ul1=document.getElementsByTagName("ul")[1];
+			var ul2=document.getElementsByTagName("ul")[2];
+			var ul3=document.getElementsByTagName("ul")[3];
+
+			var footer=document.getElementById("footer");
+			var ul3_1=footer.getElementsByTagName("ul")[0];
+			var ul3_2=footer.getElementsByTagName("ul")[3];
+			var ul3_3=footer.getElementsByTagName("ul")[6];
+			// 鼠标点击右键效果
+			document.documentElement.oncontextmenu=function(event){
+				event.preventDefault();//清除默认效果
+				var div=document.getElementById("app");
+				div.style.display="block"//弹出标签
+
+				//弹出框位置
+				ul.style.top=event.clientY+"px";
+				ul.style.left=event.clientX+"px";
+				//二级标位置
+				ul1.style.top=event.clientY+40+"px";
+				ul1.style.left=event.clientX+201+"px";
+
+				ul2.style.top=event.clientY+80+"px";
+				ul2.style.left=event.clientX+201+"px";
+
+				ul3.style.top=event.clientY+120+"px";
+				ul3.style.left=event.clientX+201+"px";
+
+				//三级标位置
+				ul3_1.style.top=event.clientY+120+"px";
+				ul3_1.style.left=event.clientX+402+"px";
+
+				ul3_2.style.top=event.clientY+210+"px";
+				ul3_2.style.left=event.clientX+402+"px";
+
+				ul3_3.style.top=event.clientY+300+"px";
+				ul3_3.style.left=event.clientX+402+"px";
+			}
+
+			//点击旁边弹出框消失
+			document.documentElement.onclick=function(){
+				var div=document.getElementById("app");
+				div.style.display="none";
+			}
+		}
+	</script>
+</body>
+</html>

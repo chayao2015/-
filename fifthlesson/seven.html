@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>用键盘控制DIV</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+		pre{
+			border: 1px dotted green;
+			font-size: 16px;
+			color: green;
+		}
+		div{
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+			top: 80px;
+			left: 350px;
+		}
+	</style>
+</head>
+<body>
+	<pre>
+	
+	红色方块为键盘操作区域，您可以进行如下操作：
+
+	上：↑ 下：↓ 左：← 右：→
+
+	Ctrl + 1 : 背景变为绿色
+	Ctrl + 2 : 背景变为黄色
+	Ctrl + 3 : 背景变为蓝色
+	Ctrl + ↑ : 放大
+	Ctrl + ↓ : 缩小
+	</pre>
+	<div></div>
+	<script type="text/javascript">
+		window.onload=function(){
+			var div=document.getElementsByTagName('div')[0];
+			document.onkeydown=function(e){
+				e.preventDefault();
+				//alert(e.keyCode);
+				 if(e.ctrlKey==true){
+				 	switch(e.keyCode){
+				 		case 49://1
+				 		div.style.backgroundColor="green";
+				 		break;
+				 		case 50://2
+				 		div.style.backgroundColor="yellow";
+				 		break;
+				 		case 51://3
+				 		div.style.backgroundColor="blue";
+				 		break;
+				 		case 38://放大
+				 		var width=div.offsetWidth;
+				 		var height=div.offsetHeight;
+				 		var top=div.offsetTop;
+				 		var left=div.offsetLeft;
+				 		width+=6;
+				 		height+=6;
+				 		div.style.width=width+"px";
+				 		div.style.height=height+"px";
+				 		div.style.left=left-3+"px";
+				 		div.style.top=top-3+"px";
+				 		break;
+				 		case 40://缩小
+				 		var width=div.offsetWidth;
+				 		var height=div.offsetHeight;
+				 		var top=div.offsetTop;
+				 		var left=div.offsetLeft
+				 		width-=6;
+				 		height-=6;
+				 		div.style.width=width+"px";
+				 		div.style.height=height+"px";
+				 		div.style.left=left+3+"px";
+				 		div.style.top=top+3+"px";
+				 		break;
+				 	}
+				 	
+				 }else{
+				 	switch(e.keyCode){
+				 		case 37:
+				 		var left=div.offsetLeft;
+				 		left-=5;
+				 		div.style.left=left+"px";
+				 		break;
+				 		case 39:
+				 		var left=div.offsetLeft;
+				 		left+=5;
+				 		div.style.left=left+"px";
+				 		break;
+				 		case 38:
+				 		var top=div.offsetTop;
+				 		top-=5;
+				 		div.style.top=top+"px";
+				 		break;
+				 		case 40:
+				 		var top=div.offsetTop;
+				 		top+=5;
+				 		div.style.top=top+"px";
+				 		break;
+				 	}
+				 	 
+				 }
+			}
+		}
+	</script>
+</body>
+</html>

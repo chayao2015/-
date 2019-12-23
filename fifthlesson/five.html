@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>跟随鼠标移动（大图展示）</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul{
+			margin: auto;
+			width: 700px;
+			height: 150px;
+			list-style: none;
+			display: flex;
+			justify-content: space-between;
+		}
+		li{
+			width: 150px;
+			height: 150px;
+		}
+		li:hover{
+			cursor: crosshair;
+		}
+		img{
+			width: 150px;
+			height: 150px;
+			border: 1px solid black;
+		}
+		strong{
+			float: left;
+			position: absolute;
+		}
+		strong img{
+			width: 350px;
+			height: 350px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<li v-for="li in li" @mouseover="fn(li.index)" @mouseleave="fn2"><img v-bind:src="li.img"></li>
+		</ul>
+		<strong v-show="vshow"><img :src="message"></strong>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				vshow:false,
+				message:'',
+				clientx:'',
+				clienty:'',
+				li:[
+					{index:0,img:"imgs/five1.png"},
+					{index:1,img:"imgs/five2.png"},
+					{index:2,img:"imgs/five3.png"},
+					{index:3,img:"imgs/five4.png"}
+				]
+			},
+			methods:{
+				fn(index){
+					this.message=this.li[index].img;
+					this.vshow=true;
+				},
+				fn2(){
+					this.vshow=false;
+				}
+			}
+		})
+		document.documentElement.addEventListener('mousemove',function(event){
+			//event=event||window.event;
+			var strong=document.getElementsByTagName('strong')[0];
+			strong.style.left=event.clientX+10+"px";
+			strong.style.top=event.clientY+10+"px";
+		})
+	</script>
+</body>
+</html>

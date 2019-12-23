@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>输入两个数字比较大小</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		#app{
+			width: 700px;
+			margin:0 auto;
+			position: relative;
+			top: 50px;
+			font-size: 20px;
+		}
+		input,button{
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="one" name="one"> vs <input type="text" v-model="two"> <button @click="fn">最大的数是</button> <strong>{{message}}</strong>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				message:'?',
+				one:'',
+				two:''
+				
+			},
+			methods:{
+				fn(){
+					if(Number(this.one)-Number(this.two)>0){
+						this.message=Number(this.one);
+					}if (Number(this.one)-Number(this.two)<0) {
+						this.message=Number(this.two);
+					}else if(Number(this.one)-Number(this.two)==0){
+						this.message='相等';
+					}
+				}
+			}
+		})
+	</script>
+</body>
+</html>

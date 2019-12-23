@@ -1,0 +1,298 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>实例索引</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+	*{margin:0;padding:0;}
+	body{background-color:#f6f6f6;}
+		#app{
+			width: 510px;
+			margin:auto;
+			border: 10px solid lightgray;
+			border-radius: 10px;
+		}
+		#app ul{
+			background-color: white;
+			list-style:none;
+			margin: 5px;
+		}
+		#app ul li{
+			/*先定义要过渡效果对象的高，不然过渡效果无效（被子元素撑出来也不行）*/
+			height: 40px;		
+			margin-top: 1px;
+			overflow: hidden;
+		}
+		#app ul li h3 a{
+			display: block;
+			width: 500px;
+			height: 40px;
+			color: white;
+			line-height: 40px;
+			text-decoration: none;
+			background-color:#9C0;
+		}
+		#app ul li p a{
+			display: block;
+			width: 500px;
+			height: 30px;
+			line-height: 30px;
+			color: white;
+			margin-top: 1px;
+			text-decoration: none;
+			background-color:#7CF;
+		}
+		.pcolor{
+			background-color: #7CF !important;
+			
+		}
+
+		/*当屏幕宽度小于600时*/
+		@media(max-width:600px){
+			#app{width: 95%;}
+			#app ul {width:99%; }
+			#app ul li{width:99%;}
+			#app ul li h3 a{width:100%;}
+			#app ul li p a{width:100%;}
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+			<ul>
+				<li>
+					<h3 v-bind:p1="p[0].p1" @click="fn(0)"><a href="#" :class="{pcolor:p[0].p1[0].pcolor}">&nbsp;&nbsp;第一课({{p[0].p1.length}})</a></h3>
+					<p v-for="p1 in p[0].p1" v-if="p1.if" ><a href="p1.url" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[1].p1" @click="fn(1)"><a href="#" :class="{pcolor:p[1].p1[0].pcolor}">&nbsp;&nbsp;第二课({{p[1].p1.length}})</a></h3>
+					<p v-for="p1 in p[1].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[2].p1" @click="fn(2)"><a href="#" :class="{pcolor:p[2].p1[0].pcolor}">&nbsp;&nbsp;第三课({{p[2].p1.length}})</a></h3>
+					<p v-for="p1 in p[2].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[3].p1" @click="fn(3)"><a href="#" :class="{pcolor:p[3].p1[0].pcolor}">&nbsp;&nbsp;第四课({{p[3].p1.length}})</a></h3>
+					<p v-for="p1 in p[3].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[4].p1" @click="fn(4)"><a href="#" :class="{pcolor:p[4].p1[0].pcolor}">&nbsp;&nbsp;第五课({{p[4].p1.length}})</a></h3>
+					<p v-for="p1 in p[4].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[5].p1" @click="fn(5)"><a href="#" :class="{pcolor:p[5].p1[0].pcolor}">&nbsp;&nbsp;第六课({{p[5].p1.length}})</a></h3>
+					<p v-for="p1 in p[5].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[6].p1" @click="fn(6)"><a href="#" :class="{pcolor:p[6].p1[0].pcolor}">&nbsp;&nbsp;第七课({{p[6].p1.length}})</a></h3>
+					<p v-for="p1 in p[6].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[7].p1" @click="fn(7)"><a href="#" :class="{pcolor:p[7].p1[0].pcolor}">&nbsp;&nbsp;第八课({{p[7].p1.length}})</a></h3>
+					<p v-for="p1 in p[7].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[8].p1" @click="fn(8)"><a href="#" :class="{pcolor:p[8].p1[0].pcolor}">&nbsp;&nbsp;第九课({{p[8].p1.length}})</a></h3>
+					<p v-for="p1 in p[8].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[9].p1" @click="fn(9)"><a href="#" :class="{pcolor:p[9].p1[0].pcolor}">&nbsp;&nbsp;第十课({{p[9].p1.length}})</a></h3>
+					<p v-for="p1 in p[9].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[10].p1" @click="fn(10)"><a href="#" :class="{pcolor:p[10].p1[0].pcolor}">&nbsp;&nbsp;项目实例({{p[10].p1.length}})</a></h3>
+					<p v-for="p1 in p[10].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[11].p1" @click="fn(11)"><a href="#" :class="{pcolor:p[11].p1[0].pcolor}">&nbsp;&nbsp;YUI实例({{p[11].p1.length}})</a></h3>
+					<p v-for="p1 in p[11].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+				<li>
+					<h3 v-bind:p1="p[12].p1" @click="fn(12)"><a href="#" :class="{pcolor:p[12].p1[0].pcolor}">&nbsp;&nbsp;KISSY实例({{p[12].p1.length}})</a></h3>
+					<p v-for="p1 in p[12].p1" v-if="p1.if" ><a href="#" :class="{pcolor:p1.pcolor}">&nbsp;&nbsp;{{p1.index}}）{{p1.text}}</a></p>
+				</li>
+			</ul>
+	</div>
+
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				p:[
+				{p1:[
+					{index:1,text:' 控制div属性',if:true,pcolor:false,url:''},
+					{index:2,text:' 网页换肤',if:true,pcolor:false},
+					{index:3,text:' 函数接收参数并弹出',if:true,pcolor:false},
+					{index:4,text:' 用循环将三个DIV变成红色',if:true,pcolor:false},
+					{index:5,text:' 鼠标移入/移出改变样式',if:true,pcolor:false},
+					{index:6,text:' 记住密码提示框',if:true,pcolor:false}
+				]},
+				
+				{p1:[
+					{index:1,text:' 百度输入法',if:true,pcolor:false},
+					{index:2,text:' 点击DIV，显示其innerHTML',if:true,pcolor:false},
+					{index:3,text:' 求出数组中所有数字的和',if:true,pcolor:false},
+					{index:4,text:' 弹出层效果',if:true,pcolor:false},
+					{index:5,text:' 函数传参，改变DIV任意属性的值',if:true,pcolor:false},
+					{index:6,text:' 图片列表：鼠标移入/移出改变图透明度',if:true,pcolor:false},
+					{index:7,text:' 简易选项卡',if:true,pcolor:false},
+					{index:8,text:' 简易JS年历',if:true,pcolor:false},
+					{index:9,text:' 单一按钮显示/隐藏一播放列表收缩展开',if:true,pcolor:false},
+					{index:10,text:' 提示框效果',if:true,pcolor:false},
+					{index:11,text:' 鼠标移过，修改图片路径',if:true,pcolor:false},
+					{index:12,text:' 复选框（checkbox）全选/全不选/返选',if:true,pcolor:false}
+				]},
+				{p1:[
+					{index:1,text:' 用typeof查看数据类型',if:true,pcolor:false},
+					{index:2,text:' 用parseInt解析数字，并求和',if:true,pcolor:false},
+					{index:3,text:' 累加按钮，自加1',if:true,pcolor:false},
+					{index:4,text:' 输入两个数字，比较大小',if:true,pcolor:false},
+					{index:5,text:' 页面加载后累加，自加1',if:true,pcolor:false},
+					{index:6,text:' 判断数字是否为两位数',if:true,pcolor:false},
+					{index:7,text:' 网页计算器',if:true,pcolor:false},
+					{index:8,text:' 简易网页时钟',if:true,pcolor:false},
+					{index:9,text:' 倒计时时钟（100秒）',if:true,pcolor:false}
+					
+				]},
+				
+				{p1:[
+					{index:1,text:' setTimeout应用',if:true,pcolor:false},
+					{index:2,text:' 自动播放一幻灯片效果',if:true,pcolor:false},
+					{index:3,text:' 自动改变方向一幻灯片效果',if:true,pcolor:false},
+					{index:4,text:' agruments应用一求出函数参数的总合',if:true,pcolor:false},
+					{index:5,text:' css函数一设置/读取对象的属性',if:true,pcolor:false},
+					{index:6,text:' 当前输入框高亮显示',if:true,pcolor:false},
+					{index:7,text:' 数组练习：各种数组方法的使用',if:true,pcolor:false},
+					{index:8,text:' 事件练习：封装兼容性添加、删除事件的函数',if:true,pcolor:false},
+					{index:9,text:' 星级评分系统',if:true,pcolor:false}	
+				]},
+				{p1:[
+					{index:1,text:' 模拟select控件',if:true,pcolor:false},
+					{index:2,text:' 点击页面，显示单击的坐标',if:true,pcolor:false},
+					{index:3,text:' 用户按下键盘，显示keyCode',if:true,pcolor:false},
+					{index:4,text:' 阻止右键菜单（阻止默认事件）',if:true,pcolor:false},
+					{index:5,text:' 跟随鼠标移动（大图展示）',if:true,pcolor:false},
+					{index:6,text:' 自定义右键菜单',if:true,pcolor:false},
+					{index:7,text:' 用键盘控制Div',if:true,pcolor:false},
+					{index:8,text:' Div闪烁',if:true,pcolor:false}
+				]},
+				
+				{p1:[
+					{index:1,text:' 完美拖拽',if:true,pcolor:false},
+					{index:2,text:' 仿腾讯微博效果',if:true,pcolor:false},
+					{index:3,text:' 自定义多级右键菜单',if:true,pcolor:false}
+					
+				]},
+				
+				{p1:[
+					{index:1,text:' 自动轮播广告（缓冲效果）',if:true,pcolor:false},
+					{index:2,text:' 图片切换（Loading效果）',if:true,pcolor:false},
+					{index:3,text:' 移动效果（按轨迹移动）',if:true,pcolor:false}
+					
+				]},
+				
+				{p1:[
+					{index:1,text:' iPhone手机解锁效果',if:true,pcolor:false},
+					{index:2,text:' 自定义滚动条',if:true,pcolor:false},
+					{index:3,text:' 拖拽一Clone',if:true,pcolor:false},
+					{index:4,text:' 拖拽并可以改变大小',if:true,pcolor:false}
+				]},
+				
+				{p1:[
+					{index:1,text:' 仿苹果电脑任务栏菜单',if:true,pcolor:false},
+					{index:2,text:' 拼图小游戏',if:true,pcolor:false},
+					{index:3,text:' 模拟表单控件',if:true,pcolor:false}
+				]},
+				
+				{p1:[
+					{index:1,text:' 为数组添加方法（求和，最大值）',if:true,pcolor:false},
+					{index:2,text:' 自动轮播广告（面向对象版）',if:true,pcolor:false},
+					{index:3,text:' 运动框架（面向对象版）',if:true,pcolor:false},
+					{index:4,text:' 照片墙一多实例演示（面向对象版）',if:true,pcolor:false},
+					{index:5,text:' 拖拽库（面向对象版）',if:true,pcolor:false},
+					{index:6,text:' 无缝滚动（面向对象版）',if:true,pcolor:false},
+					{index:7,text:' 延时加载（面向对象版）',if:true,pcolor:false},
+					{index:8,text:' 仿腾讯游戏《英雄杀》官网Flash效果',if:true,pcolor:false},
+					{index:9,text:' 百度有啊通栏展示效果',if:true,pcolor:false},
+					{index:10,text:' 放烟花效果（面向对象版）',if:true,pcolor:false},
+					{index:11,text:' 《穿越火线》官网导航菜单',if:true,pcolor:false},
+					{index:12,text:' 《百度风云榜》TAB切换',if:true,pcolor:false},
+					{index:13,text:' IBM官网导航条效果',if:true,pcolor:false},
+					{index:14,text:' 面试题-动态生成表格',if:true,pcolor:false}
+				]},
+				
+				{p1:[
+					{index:1,text:' 眼镜在线试戴',if:true,pcolor:false},
+					{index:2,text:' 日历组件',if:true,pcolor:false},
+					{index:3,text:' 淘宝网-迷你登录',if:true,pcolor:false},
+					{index:4,text:' 仿Google+ 游戏频道焦点图效果',if:true,pcolor:false}
+				]},
+
+				{p1:[
+					{index:1,text:' 淘宝旅行通用日历组件',if:true,pcolor:false},
+					{index:2,text:' 酒店价格日历',if:true,pcolor:false},
+				]},
+				
+				{p1:[
+					{index:1,text:' KISSY版-酒店价格日历',if:true,pcolor:false},
+					{index:2,text:' KISSY版-图片浏览组件',if:true,pcolor:false},
+					{index:3,text:' 酒店地图交通与周边',if:true,pcolor:false},
+					{index:4,text:' 多SKU酒店价格中心',if:true,pcolor:false},
+					{index:5,text:' 多SKU门票价格中心',if:true,pcolor:false},
+					{index:6,text:' 新版-多SKU门票价格中心',if:true,pcolor:false}
+				]}
+
+
+				]
+			},
+			methods:{
+				 fn(n){
+				 	var app=document.getElementById("app");
+					var ul=document.getElementsByTagName("ul")[0];
+				 	var li=ul.getElementsByTagName("li");
+				 	
+				 	for(var i=0;i<this.p.length;i++){
+				 		li[i].style.height=40+"px";	
+				 		var p=this.p[i].p1;
+							p[0].pcolor=false;
+				 	}
+				 	
+
+				 	this.p[n].p1.pcolor=!this.p[n].p1.pcolor;
+				 	var p=this.p[n].p1;
+		 			 var merge=function(){
+				 					if (p.pcolor==true) {
+				 					li[n].style.height=p.length*30+40+p.length+"px";
+				 					li[n].style.transition="0.3s";
+				 					setTimeout(function(){
+										p[0].pcolor=true;
+				 					},300)
+				 		
+					 			}else{
+					 				li[n].style.height=40+"px";	
+					 				setTimeout(function(){
+					 					p[0].pcolor=false;
+				  					},300)
+					 			}
+				 				}
+				 	
+				 		if(ul.offsetHeight==532){
+				 			merge();
+				 		}else{
+				 			setTimeout(merge,600)
+				 		}							
+				 }
+
+
+							
+						
+					    
+					}
+			
+			
+		})
+	</script>
+</body>
+</html>

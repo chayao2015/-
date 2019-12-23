@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>简易时钟</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		body{
+			background-color: #f6f6f6;
+		}
+		#app{
+			width: 600px;
+			height: 600px;
+			margin: auto;
+			position: relative;
+			top: 50px;
+			
+		}
+		.ul1{
+			width: 100%;
+			height: 100%;
+			background-color: white;
+			list-style: none;
+			border-radius: 600px;
+		}
+		.ul1 li{
+			width: 156px;
+			height: 30px;
+			background-color: gray;
+			text-align: center;
+			float: left;
+			position: absolute;
+			left: 222px;
+			top: 0;
+			transform-origin: center 300px;
+		}
+		.ul1 li p{
+			float: right;
+			transform: rotate(20deg);
+			margin: 5px;
+		}
+		.ul2{
+			width: 400px;
+			height: 400px;
+			
+			position: absolute;
+			top: 100px;
+			left: 100px;
+			border-radius: 400px;
+			list-style: none;
+			
+		}
+		.ul2 li{
+			width: 104px;
+			height: 30px;
+			float: left;
+			position: absolute;
+			top: 0px;
+			left: 148px;
+			background-color: lightgray;
+			transform-origin: center 200px;
+			text-align: center;
+			font-weight: bold;
+		}
+		 .one{transform: rotate(0deg);}
+		 .two{transform: rotate(30deg);}
+		 .three{transform: rotate(60deg);}
+		 .four{transform: rotate(90deg);}
+		 .five{transform: rotate(120deg);}
+		 .six{transform: rotate(150deg);}
+		 .seven{transform: rotate(180deg);}
+		 .eight{transform: rotate(210deg);}
+		 .nine{transform: rotate(240deg);}
+		 .ten{transform: rotate(270deg);}
+		 .eleven{transform: rotate(300deg);}
+		 .twleven{transform: rotate(330deg);}
+		 aside{
+		 	width: 300px;
+		 	height: 40px;
+		 	line-height: 40px;
+		 	font-size: 25x;
+		 	font-weight: bold;
+		 	margin: auto;
+		 	position: relative;
+		 	bottom: 320px;
+		 }
+		 aside span{
+		 	margin: 2px;
+		 	border: 1px solid black;
+		 }
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ul class="ul1">
+			<li v-for="li1 in li1" v-bind:class="li1.type">
+				<h3>{{li1.h}}</h3>
+				<p>{{li1.p}}</p>
+			</li>
+		</ul>
+		<ul class="ul2">
+			<li v-for="li2 in li2" v-bind:class="li2.type">{{li2.name}}</li>
+		</ul>
+		<aside>
+			<span>{{year}}年</span>
+			<span>{{month}}月</span>
+			<span>{{day}}日</span>
+			<span>{{hour}}时</span>
+			<span>{{minute}}分</span>
+			<span>{{second}}秒</span>
+		</aside>
+	</div>
+	<script type="text/javascript">
+	var vm=new Vue({
+			el:"#app",
+			data:{
+				li1:[
+					{h:'胆',p:'1',type:'one'},
+					{h:'肝',p:'3',type:'two'},
+					{h:'肺',p:'5',type:'three'},
+					{h:'大肠',p:'7',type:'four'},
+					{h:'胃',p:'9',type:'five'},
+					{h:'脾',p:'11',type:'six'},
+					{h:'心',p:'13',type:'seven'},
+					{h:'肠',p:'15',type:'eight'},
+					{h:'膀胱',p:'17',type:'nine'},
+					{h:'肾',p:'19',type:'ten'},
+					{h:'心包',p:'21',type:'eleven'},
+					{h:'三焦',p:'23',type:'twleven'}
+				],
+				li2:[
+					{name:'子',type:'one'},
+					{name:'丑',type:'two'},
+					{name:'寅',type:'three'},
+					{name:'卯',type:'four'},
+					{name:'辰',type:'five'},
+					{name:'巳',type:'six'},
+					{name:'午',type:'seven'},
+					{name:'未',type:'eight'},
+					{name:'申',type:'nine'},
+					{name:'酉',type:'ten'},
+					{name:'戌',type:'eleven'},
+					{name:'亥',type:'twleven'}
+				],
+				year:'',
+				month:'',
+				day:'',
+				hour:'',
+				minute:'',
+				second:''
+
+			}
+		})
+		window.onload=function(){
+			setInterval(function(){
+				var date=new Date;
+				vm.year=date.getFullYear();
+				vm.month=date.getMonth()+1;
+				vm.day=date.getDate();
+				vm.hour=date.getHours();
+				vm.minute=date.getMinutes();
+				vm.second=date.getSeconds();
+				var hour=date.getHours();
+				var ul1=document.getElementsByTagName('ul')[0];
+				var li1=ul1.getElementsByTagName("li");
+				var ul2=document.getElementsByTagName('ul')[1];
+				var li2=ul2.getElementsByTagName("li");
+				li1[parseInt(hour/2+0.5)].style.backgroundColor="orange";
+				li1[parseInt(hour/2+0.5)].style.zIndex="5";
+				li2[parseInt(hour/2+0.5)].style.backgroundColor="orange";
+				li2[parseInt(hour/2+0.5)].style.zIndex="5";
+			},1000)
+		}
+	</script>
+</body>
+</html>

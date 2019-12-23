@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>设置/读取对象的样式</title>
+        <meta charset="UTF-8">
+        <script src="vue.min.js"></script>
+        <style type="text/css">
+            *{margin:0;padding: 0;}
+            div{
+                margin: auto;
+                position:relative;
+                top: 50px;
+                
+            }
+            .style1{
+                width:400px;
+                height: 250px;
+                border:2px solid coral;
+                background-color:rgb(210, 198, 30);
+            }
+            .style2{
+                width:300px;
+                height: 100px;
+                border:2px solid beige;
+                background-color:rgb(51, 210, 30);
+            }
+            button{
+                padding: 5px 10px;
+                margin: 10px;
+                border:none;
+                color:white;
+                background-color: coral;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app" v-bind:class="{style1:styleone,style2:styletwo}">
+            <button @click="fn">获取样式参数</button>
+            <button @click="style1">样式一</button>
+            <button @click="style2">样式二</button>
+        </div>
+        <script type="text/javascript">
+            new Vue({
+                el:'#app',
+                data:{
+                    styleone:true,
+                    styletwo:false
+                },
+                methods:{
+                    fn(){
+                        var div=document.getElementById("app");
+                        alert(
+                            "width: " + div.offsetWidth+
+                            "\nheight:"+div.offsetHeight+
+                            "\nbackgroundcolor:"+div.currentStyle.backgroundColor
+
+                            )
+
+                    },
+                    style1(){
+                        this.styleone=true;
+                        this.styletwo=false;
+                    },
+                    style2(){
+                         this.styleone=false;
+                        this.styletwo=true;
+                    },
+                }
+            })
+            window.onload=function(){
+               HTMLElement.prototype.__defineGetter__("currentStyle", function () { 
+                return this.ownerDocument.defaultView.getComputedStyle(this, null); 
+                });
+               
+            }
+        </script>
+    </body>
+</html>

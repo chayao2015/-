@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>函数传参，改变DIV任意属性</title>
+	<meta charset="utf-8">
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#app{
+			width: 500px;
+			height: 500px;
+			margin: auto;
+			position: relative;
+			top: 50px;
+			font-size: 20px;
+		}
+		input{
+			border:none;
+			width: 200px;
+			height: 25px;
+			font-size:18px;
+			margin-top: 20px;
+		}
+		button{
+			width: 60px;
+			height: 25px;
+			margin: 20px;
+		}
+		#div{
+			width: 350px;
+			height: 250px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p><label>属性名： </label><input type="text" v-model="nam"></p>
+		<p><label>属性值： </label><input type="text" v-model="zhi"></p>
+		<p><button @click="determine">确定</button> <button @click="reset">重置</button></p>
+		<div id="div"><p>在上方输入框输入"属性名"及"属性值"，点击确定按钮查看效果。</p></div>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				nam:'backgroundColor',
+				zhi:'blue'
+			},
+			methods:{
+				determine(){
+					var nam=this.nam;
+					var zhi=this.zhi;
+					document.getElementById("div").style[nam]=zhi;
+				},
+				reset(){
+					document.getElementById("div").removeAttribute("style");
+				}
+			}
+
+		})
+	</script>
+</body>
+</html>
